@@ -65,5 +65,5 @@ To run this project, ensure you have Flutter installed on your system. You can f
 
 ## Glimpse of Application : 
 
-<video controls src="WhatsApp Video 2024-10-07 at 14.43.10_8a35bce2.mp4" title="Glimpse 1"></video>
-<video controls src="WhatsApp Video 2024-10-07 at 14.44.09_bfb3e74d.mp4" title="Glimpse 2"></video>
+<video controls src="video1.mp4" title="Glimpse 1"></video>
+<video controls src="video2.mp4" title="Glimpse 2"></video>
