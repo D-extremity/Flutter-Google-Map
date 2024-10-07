@@ -63,7 +63,10 @@ To run this project, ensure you have Flutter installed on your system. You can f
     flutter run
 ```
 
-## Glimpse of Application : 
+## Glimpse of Application
 
-<video controls src="video1.mp4" title="Glimpse 1"></video>
-<video controls src="video2.mp4" title="Glimpse 2"></video>
+https://github.com/user-attachments/assets/496c2699-f9a0-476d-813b-edc7bb29a19a
+
+
+https://github.com/user-attachments/assets/178b5865-7b9b-4d65-ac70-a4d3345a404a
+
