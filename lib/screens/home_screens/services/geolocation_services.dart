@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -9,6 +11,7 @@ class GeolocationServices {
       return await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
     } catch (e) {
+      log(e.toString());
       toast("Entered Location not found", false);
 
       return null;
@@ -30,6 +33,12 @@ class GeolocationServices {
   }
 
   static Future<List<Location>> locationThroughAddress(String address) async {
-    return await locationFromAddress(address);
+    try {
+      return await locationFromAddress(address);
+    } catch (e) {
+      log(e.toString());
+      toast("Entered Location not found", false);
+      return  <Location>[];
+    }
   }
 }

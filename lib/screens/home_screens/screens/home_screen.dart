@@ -5,6 +5,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ride_sense/screens/home_screens/services/geolocation_services.dart';
+import 'package:ride_sense/screens/home_screens/services/weather_service.dart';
 import 'package:ride_sense/screens/home_screens/utils/custom_bordered_box.dart';
 import 'package:ride_sense/screens/home_screens/utils/custom_text_field.dart';
 import 'package:ride_sense/screens/map_screen/screens/map_screen.dart';
@@ -49,12 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       await GeolocationServices.locationThroughAddress(
                           locationController.text.trim());
                   log(locations.first.toString());
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => MapScreen(
-                            ltlng: LatLng(locations.first.latitude,
-                                locations.first.longitude),
-                          )));
-                  return;
+                  await WeatherService.getWeatherData(
+                    lat: "${locations.first.latitude}",
+                    long: "${locations.first.longitude}",
+                  ).then((String? temp) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MapScreen(
+                              temp: temp ?? "Not Found",
+                              ltlng: LatLng(locations.first.latitude,
+                                  locations.first.longitude),
+                            )));
+                    return;
+                  });
                 }
                 toast("Search field is empty", false);
               },
@@ -70,12 +77,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     await GeolocationServices.currentPosition()
                         .then((Position? p) async {
                       if (p != null) {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        await WeatherService.getWeatherData(
+                          lat: "${p.latitude}",
+                          long: "${p.longitude}",
+                        ).then((String? temp) {
+                          Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => MapScreen(
+                              temp: temp??"Not found",
                                   ltlng: LatLng(p.latitude, p.longitude),
                                 )));
-                      } 
-                      
+                        });
+                        
+                      }
                     });
                   }
                 });

@@ -10,7 +10,8 @@ import 'package:ride_sense/screens/map_screen/widgets/option_widget.dart';
 
 class MapScreen extends StatefulWidget {
   final LatLng ltlng;
-  const MapScreen({super.key, required this.ltlng});
+  final String temp;
+  const MapScreen({super.key, required this.ltlng, required this.temp});
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -36,7 +37,8 @@ class _MapScreenState extends State<MapScreen> {
         create: (context) => MapTypeBloc(),
         child: BlocBuilder<MapTypeBloc, MapTypeState>(
           builder: (context, state) {
-            Text mapTypeHeading = getText("Map Mode : Hybrid",size,color: Colors.black);
+            Text mapTypeHeading =
+                getText("Map Mode : Hybrid", size, color: Colors.black);
             Widget mapWidget = MapWidget(
                 size: size,
                 mapType: MapType.hybrid,
@@ -44,7 +46,8 @@ class _MapScreenState extends State<MapScreen> {
                 controller: _controller,
                 widget: widget);
             if (state is MapTypeNormalState) {
-              mapTypeHeading = getText("Map Mode : Normal",size,color: Colors.black);
+              mapTypeHeading =
+                  getText("Map Mode : Normal", size, color: Colors.black);
               mapWidget = MapWidget(
                   size: size,
                   mapType: MapType.normal,
@@ -53,7 +56,8 @@ class _MapScreenState extends State<MapScreen> {
                   widget: widget);
             }
             if (state is MapTypeHybridState) {
-              mapTypeHeading = getText("Map Mode : Hybrid",size,color: Colors.black);
+              mapTypeHeading =
+                  getText("Map Mode : Hybrid", size, color: Colors.black);
               mapWidget = MapWidget(
                   size: size,
                   mapType: MapType.hybrid,
@@ -62,7 +66,8 @@ class _MapScreenState extends State<MapScreen> {
                   widget: widget);
             }
             if (state is MapTypeSatelliteState) {
-              mapTypeHeading = getText("Map Mode : Satellite",size,color: Colors.black);
+              mapTypeHeading =
+                  getText("Map Mode : Satellite", size, color: Colors.black);
               mapWidget = MapWidget(
                   size: size,
                   mapType: MapType.satellite,
@@ -71,7 +76,8 @@ class _MapScreenState extends State<MapScreen> {
                   widget: widget);
             }
             if (state is MapTypeTerrainState) {
-              mapTypeHeading = getText("Map Mode : Terrain",size,color: Colors.black);
+              mapTypeHeading =
+                  getText("Map Mode : Terrain", size, color: Colors.black);
               mapWidget = MapWidget(
                   size: size,
                   mapType: MapType.terrain,
@@ -82,7 +88,12 @@ class _MapScreenState extends State<MapScreen> {
 
             return Column(
               children: [
-                mapTypeHeading,
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    mapTypeHeading,
+                    getText(widget.temp, size, color: Colors.black)
+                  ],
+                ),
                 mapWidget,
                 SizedBox(
                   height: size.height * 0.01,
